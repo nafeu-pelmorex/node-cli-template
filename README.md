@@ -21,6 +21,10 @@ npm install
 node-cli-template
 ```
 
+### Development
+
+Add all of your modifications to the `src/cli.js` file.
+
 ### References
 
 This CLI uses [arg](https://github.com/zeit/arg#readme) for argument option parsing and [Inquirer](http://adilapapaya.com/docs/inquirer/) for generating prompts:
