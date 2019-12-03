@@ -1,0 +1,27 @@
+{
+  "name": "@nafeu-pelmorex/node-cli-template",
+  "version": "1.0.0",
+  "description": "A template to bootstrap CLIs",
+  "main": "src/cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "@nafeu-pelmorex/node-cli-template": "bin/node-cli-template",
+    "node-cli-template": "bin/node-cli-template"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "cli",
+    "node-cli-template"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "arg": "^4.1.2",
+    "esm": "^3.2.25",
+    "inquirer": "^7.0.0"
+  }
+}
