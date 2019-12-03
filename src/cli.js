@@ -14,6 +14,7 @@ function parseArgumentsIntoOptions(rawArgs) {
     )
     return {
         skipPrompts: args['--yes'] || false,
+        execution: args['--yes'] || false,
         command: args._[0],
     }
 }
@@ -39,19 +40,38 @@ async function promptForMissingOptions(options) {
     }
 
     const answers = await inquirer.prompt(questions);
+
+    if (!options.execution) {
+        const confirmation = await inquirer.prompt([
+            {
+                type: 'confirm',
+                name: 'execution',
+                message: `Execute command: '${answers.command || options.command}'?`,
+                default: false,
+            }
+        ])
+        return {
+            ...options,
+            command: options.command || answers.command,
+            execution: options.execution || confirmation.execution,
+        }
+    }
+
     return {
         ...options,
         command: options.command || answers.command,
     }
 }
 
-async function handleOptions({ command }) {
-    const result = await execa(command, [], {});
-    if (result.failed) {
-        Promise.reject(`Failed to execute ${command}`)
-        return;
-    } else {
-        console.log(result.stdout);
+async function handleOptions({ command, execution }) {
+    if (execution) {
+        const result = await execa(command, [], {});
+        if (result.failed) {
+            Promise.reject(`Failed to execute ${command}`)
+            return;
+        } else {
+            console.log(result.stdout);
+        }
     }
 }
 
